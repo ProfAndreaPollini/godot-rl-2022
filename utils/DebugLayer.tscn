@@ -21,16 +21,27 @@ color = Color( 0.388235, 0.0666667, 0.0666667, 0.698039 )
 margin_right = 194.0
 margin_bottom = 240.0
 
-[node name="Label" type="Label" parent="DebugLayerContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="DebugLayerContainer/VBoxContainer"]
 margin_right = 194.0
-margin_bottom = 14.0
+margin_bottom = 20.0
+
+[node name="Label" type="Label" parent="DebugLayerContainer/VBoxContainer/HBoxContainer"]
+margin_top = 3.0
+margin_right = 46.0
+margin_bottom = 17.0
 text = "DEBUG"
 align = 1
 
+[node name="Button" type="Button" parent="DebugLayerContainer/VBoxContainer/HBoxContainer"]
+margin_left = 50.0
+margin_right = 93.0
+margin_bottom = 20.0
+text = "clear"
+
 [node name="DebugMessages" type="VBoxContainer" parent="DebugLayerContainer/VBoxContainer"]
-margin_top = 18.0
+margin_top = 24.0
 margin_right = 194.0
-margin_bottom = 33.0
+margin_bottom = 39.0
 
 [node name="DebugMessage" type="RichTextLabel" parent="DebugLayerContainer/VBoxContainer/DebugMessages"]
 margin_right = 194.0
@@ -39,3 +50,5 @@ bbcode_enabled = true
 bbcode_text = "test *prova*"
 text = "test *prova*"
 fit_content_height = true
+
+[connection signal="button_down" from="DebugLayerContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_Button_button_down"]

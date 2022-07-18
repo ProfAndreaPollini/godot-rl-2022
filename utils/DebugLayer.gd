@@ -5,6 +5,8 @@ var show_debug_interface  := false
 onready var _ui_container = $DebugLayerContainer
 onready var debug_messages = $DebugLayerContainer/VBoxContainer/DebugMessages
 
+
+
 var DebugMessage = preload("res://utils/DebugMessage.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -17,8 +19,8 @@ func _ready():
 #	pass
 
 func add_debug_message(message):
-	if debug_messages.get_child_count() > 5:
-		debug_messages.remove_child(debug_messages.get_child(get_child_count()-1))	
+	#if debug_messages.get_child_count() > 5:
+	#	debug_messages.remove_child(debug_messages.get_child(get_child_count()-1))	
 	
 	var mes_ui = DebugMessage.instance()
 	mes_ui.set_message(message)
@@ -43,3 +45,10 @@ func _input(event):
 
 
 
+
+
+func _on_Button_button_down():
+	
+	while debug_messages.get_child_count() >0:
+		var msg = debug_messages.get_child(0)
+		debug_messages.remove_child(msg)
