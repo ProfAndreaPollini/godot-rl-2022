@@ -8,10 +8,39 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://lib/State.gd"
+}, {
+"base": "Node",
+"class": "StateManager",
+"language": "GDScript",
+"path": "res://lib/StateManager.gd"
+} ]
+_global_script_class_icons={
+"State": "",
+"StateManager": ""
+}
+
 [application]
 
 config/name="godot-rl-2022"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=426
+window/size/height=240
+window/size/test_width=1280
+window/size/test_height=720
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+
+[editor]
+
+reimport_missing_imported_files=false
 
 [gui]
 

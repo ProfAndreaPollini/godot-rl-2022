@@ -1,46 +1,20 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/Enchanted Forest Characters with animations.png" type="Texture" id=1]
-[ext_resource path="res://assets/Characters.png" type="Texture" id=2]
-[ext_resource path="res://assets/Fantasy RPG NPCs - Individuel Frames/Alchemist/Alchemist_Idle_1.png" type="Texture" id=3]
-[ext_resource path="res://assets/dungeontiles-extended v1.1/dungeontileset-extended-palette.png" type="Texture" id=4]
-[ext_resource path="res://assets/dungeontiles-extended v1.1/dungeontileset-extended.png" type="Texture" id=5]
-[ext_resource path="res://assets/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4.png" type="Texture" id=6]
-[ext_resource path="res://assets/Enchanted Forest - Individual Frames/Ranger/Ranger_Idle_1.png" type="Texture" id=7]
+[ext_resource path="res://Idle.gd" type="Script" id=1]
+[ext_resource path="res://Running.gd" type="Script" id=2]
+[ext_resource path="res://entites/King.tscn" type="PackedScene" id=3]
+[ext_resource path="res://lib/StateManager.gd" type="Script" id=8]
 
 [node name="MainScreen" type="Node2D"]
 
-[node name="Dungeontileset-extended" type="Sprite" parent="."]
-visible = false
-position = Vector2( 398, 578 )
-texture = ExtResource( 5 )
+[node name="King" parent="." instance=ExtResource( 3 )]
+position = Vector2( 194, 147 )
 
-[node name="Characters" type="Sprite" parent="Dungeontileset-extended"]
-visible = false
-position = Vector2( 140, -156 )
-texture = ExtResource( 2 )
+[node name="StateManager" type="Node" parent="."]
+script = ExtResource( 8 )
 
-[node name="EnchantedForestCharactersWithAnimations" type="Sprite" parent="Dungeontileset-extended"]
-visible = false
-position = Vector2( -198, -216 )
-texture = ExtResource( 1 )
+[node name="Idle" type="Node" parent="StateManager"]
+script = ExtResource( 1 )
 
-[node name="0X72DungeonTilesetIiV14" type="Sprite" parent="."]
-visible = false
-position = Vector2( 353, 312 )
-texture = ExtResource( 6 )
-
-[node name="RangerIdle1" type="Sprite" parent="0X72DungeonTilesetIiV14"]
-visible = false
-position = Vector2( -269, 124 )
-texture = ExtResource( 7 )
-
-[node name="AlchemistIdle1" type="Sprite" parent="0X72DungeonTilesetIiV14"]
-visible = false
-position = Vector2( -277, 155 )
-texture = ExtResource( 3 )
-
-[node name="Dungeontileset-extended-palette" type="Sprite" parent="0X72DungeonTilesetIiV14"]
-visible = false
-position = Vector2( -161, 168 )
-texture = ExtResource( 4 )
+[node name="Running" type="Node" parent="StateManager"]
+script = ExtResource( 2 )
