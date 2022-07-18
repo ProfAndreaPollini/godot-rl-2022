@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://utils/DebugMessage.gd" type="Script" id=1]
+
+[node name="DebugMessage" type="RichTextLabel"]
+margin_right = 40.0
+margin_bottom = 40.0
+bbcode_enabled = true
+fit_content_height = true
+script = ExtResource( 1 )
