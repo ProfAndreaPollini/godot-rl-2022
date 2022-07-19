@@ -9,16 +9,19 @@ var is_firing := false
 var old_global_position := Vector2.ZERO
 var COOLDOWN_TIME := 0.1
 var fire_time := 0.0
+var direction = Vector2.ZERO
 
-onready var owner_entity = null#get_parent().get_parent()
+onready var owner_entity = null #get_parent().get_parent()
 
 
 func on_mouse_moved(pos: Vector2,dir: Vector2):
+	direction = dir
 	var weapon_position =  pos + 10*dir
-	look_at(weapon_position + 100*dir)
+	
+	global_position  = pos
+	look_at(pos + 100*dir)
 	rotate(deg2rad(90))
-	global_position  = weapon_position
-
+	
 
 func _process(delta):
 	if not owner_entity: return

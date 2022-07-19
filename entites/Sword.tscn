@@ -7,6 +7,7 @@
 b = Vector2( 0, 12 )
 
 [node name="Sword" type="Area2D" groups=["weapon"]]
+position = Vector2( 24, 0 )
 rotation = 1.5708
 script = ExtResource( 2 )
 __meta__ = {
