@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4.png" type="Texture" id=1]
+[ext_resource path="res://entites/Sword.gd" type="Script" id=2]
+
+[sub_resource type="SegmentShape2D" id=1]
+b = Vector2( 0, 12 )
+
+[node name="Sword" type="Area2D"]
+rotation = 1.5708
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+offset = Vector2( -3, -12 )
+region_enabled = true
+region_rect = Rect2( 293, 18, 6, 13 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -12 )
+shape = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="Attributes" type="Node" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
