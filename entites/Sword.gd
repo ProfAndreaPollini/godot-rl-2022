@@ -12,13 +12,10 @@ var fire_time := 0.0
 
 onready var owner_entity = null#get_parent().get_parent()
 
-
-func on_mouse_moved(pos: Vector2,dir: Vector2):
-	var weapon_position =  pos + 10*dir
-	look_at(weapon_position + 100*dir)
+func on_mouse_moved(king: Vector2,event: Vector2):
+	self.global_position = king + (king - event).normalized() * -3
+	look_at( event )
 	rotate(deg2rad(90))
-	global_position  = weapon_position
-
 
 func _process(delta):
 	if not owner_entity: return
@@ -33,9 +30,6 @@ func _process(delta):
 	elif Input.is_action_just_released("ui_accept") and fire_time > COOLDOWN_TIME:
 		is_firing = false
 		global_position = old_global_position
-	
-
-
 
 func _on_Sword_body_entered(entity):
 	if entity.can_equip(self):
