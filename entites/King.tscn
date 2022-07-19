@@ -9,7 +9,7 @@
 [ext_resource path="res://assets/Fantasy RPG NPCs - Individuel Frames/King/King_Walk_3.png" type="Texture" id=7]
 [ext_resource path="res://assets/Fantasy RPG NPCs - Individuel Frames/King/King_Walk_1.png" type="Texture" id=8]
 [ext_resource path="res://entites/King.gd" type="Script" id=9]
-[ext_resource path="res://entites/Sword.tscn" type="PackedScene" id=10]
+[ext_resource path="res://entites/Player.gd" type="Script" id=10]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -41,8 +41,19 @@ position = Vector2( 0, -10 )
 shape = SubResource( 2 )
 
 [node name="sword_position" type="Position2D" parent="."]
-position = Vector2( 18, -10 )
+show_behind_parent = true
+position = Vector2( 71, -11 )
+scale = Vector2( 2, 2 )
+z_index = 3
+__meta__ = {
+"_gizmo_extents_": 102.4
+}
 
 [node name="Weapon" type="Node" parent="."]
 
-[node name="Sword" parent="Weapon" instance=ExtResource( 10 )]
+[node name="Inventory" type="Node" parent="."]
+
+[node name="Components" type="Node" parent="."]
+
+[node name="Player" type="Node" parent="Components"]
+script = ExtResource( 10 )

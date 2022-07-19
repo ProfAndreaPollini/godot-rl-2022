@@ -1,8 +1,10 @@
 extends KinematicBody2D
 
 
+signal moved(dx,dy)
+
 onready var weapon_position = $sword_position
-onready var weapon = $Weapon/Sword
+onready var weapon = get_node("Weapon").get_child(0)
 
 export  var offset: Vector2 = Vector2.ZERO
 
@@ -11,17 +13,36 @@ var direction := Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
+	connect("moved",self,"on_moved")
+	
+func on_moved(dx: float ,dy : float ) -> void:
+	print("on_moved",weapon)
+	if weapon:
+		
+		weapon.global_position = get_entity_pivot()
+	
 func _physics_process(delta):
 	pass
+	
+func can_equip(obj)-> bool:
+	return obj.get_groups().has("weapon") and $Weapon.get_child_count() == 0
+	
+	
+func add_weapon(new_weapon) -> void:
+	$Weapon.add_child(new_weapon) 
+	new_weapon.owner_entity = self
+	new_weapon.global_position = weapon_position.global_position
+	weapon = new_weapon
+	
+	#weapon.global_position = get_entity_pivot() 
+	print(weapon.owner_entity)
 	
 func get_entity_pivot(): 
 	return 	global_position + offset
 
+
 func _input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and weapon:
 		direction = (event.position - get_entity_pivot()).normalized()
 		weapon.on_mouse_moved(get_entity_pivot(),direction)
 #		weapon_position.global_position =  get_entity_pivot() + 10*dir

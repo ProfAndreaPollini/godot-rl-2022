@@ -6,7 +6,7 @@
 [sub_resource type="SegmentShape2D" id=1]
 b = Vector2( 0, 12 )
 
-[node name="Sword" type="Area2D"]
+[node name="Sword" type="Area2D" groups=["weapon"]]
 rotation = 1.5708
 script = ExtResource( 2 )
 __meta__ = {
@@ -30,4 +30,5 @@ one_shot = true
 
 [node name="Attributes" type="Node" parent="."]
 
+[connection signal="body_entered" from="." to="." method="_on_Sword_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
