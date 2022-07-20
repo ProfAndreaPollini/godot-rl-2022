@@ -29,7 +29,6 @@ extents = Vector2( 5, 10 )
 
 [node name="King" type="KinematicBody2D"]
 script = ExtResource( 9 )
-offset = Vector2( 0, -8 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -16 )
@@ -57,5 +56,3 @@ __meta__ = {
 
 [node name="Player" type="Node" parent="Components"]
 script = ExtResource( 10 )
-
-[node name="Line2D" type="Line2D" parent="."]

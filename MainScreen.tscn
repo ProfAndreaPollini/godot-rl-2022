@@ -8,6 +8,7 @@
 [ext_resource path="res://lib/StateManager.gd" type="Script" id=8]
 
 [node name="MainScreen" type="Node2D"]
+position = Vector2( 1, 0 )
 script = ExtResource( 4 )
 
 [node name="King" parent="." instance=ExtResource( 3 )]

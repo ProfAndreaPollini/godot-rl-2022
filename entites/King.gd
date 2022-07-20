@@ -16,7 +16,8 @@ func _ready():
 	connect("moved",self,"on_moved")
 	
 func on_moved(dx: float ,dy : float ) -> void:
-	print("on_moved",weapon)
+	pass
+	#print("on_moved",weapon)
 #	if weapon:
 #
 #		weapon.global_position = get_entity_pivot()
@@ -49,6 +50,9 @@ func _input(event):
 		#weapon.on_mouse_moved(get_entity_pivot(),direction)
 
 		weapon.global_position = global_position + 10*direction
+		weapon.global_position.x = clamp(weapon.global_position.x,global_position.x-5,global_position.x+5)
+		weapon.global_position.y = clamp(weapon.global_position.y,global_position.y-20,global_position.y)
+		
 		weapon.look_at(global_position + 200*direction)
 		
 		weapon.rotate(deg2rad(90))
