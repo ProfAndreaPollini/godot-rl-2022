@@ -5,3 +5,6 @@ mariodose: allora tornando al gioco l'inventario potrebbe esse studiato cosi: av
 
 MinotauroDiKyoto: 3 tipi diversi di borse/inventario che si possono comprare con i punti guadagnati
 
+mariodose: direi che potremmo mettere nel HUD 3 slot sempre sempre presenti di cui 2 con tasti rapidi (1 e 2) dove mettere pozioni o robe del genere e nel terzo mettere lo zaino che ti da l'inventario full completo
+
+mariodose: ti apre questo inventario dove ci sono i quadratini in base alla capienza e rarià dello zaino e a destra slot testa busto arma gambe scarpe

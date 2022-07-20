@@ -3,6 +3,10 @@ extends Area2D
 var entity
 var owner_entity = null
 
+onready var inventory_icon = get_node("Sprite")
+
+var icon: Texture = preload("res://assets/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/frames/flask_big_yellow.png")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass

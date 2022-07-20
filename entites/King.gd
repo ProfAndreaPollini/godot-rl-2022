@@ -46,9 +46,10 @@ func get_entity_pivot():
 
 func pickup(item):
 	print("picked up item = ",item)
-	item.owner_entity = self
-	inventory.add_child(item)
-	item.visible = false
+	if inventory.has_free_slot():
+		item.owner_entity = self
+		inventory.add_item(item)
+		item.visible = false
 	
 
 func _input(event):

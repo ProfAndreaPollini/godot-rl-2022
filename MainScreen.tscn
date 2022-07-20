@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Idle.gd" type="Script" id=1]
 [ext_resource path="res://Running.gd" type="Script" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://entites/Sword.tscn" type="PackedScene" id=5]
 [ext_resource path="res://entites/Potion.tscn" type="PackedScene" id=6]
 [ext_resource path="res://lib/StateManager.gd" type="Script" id=8]
+[ext_resource path="res://Pocket.gd" type="Script" id=9]
+[ext_resource path="res://entites/gui/PocketItemUI.tscn" type="PackedScene" id=10]
 
 [node name="MainScreen" type="Node2D"]
 position = Vector2( 1, 0 )
@@ -30,3 +32,34 @@ position = Vector2( 114, 129 )
 
 [node name="Potion" parent="." instance=ExtResource( 6 )]
 position = Vector2( 230, 82 )
+
+[node name="Pocket" type="CanvasLayer" parent="."]
+script = ExtResource( 9 )
+
+[node name="MarginContainer" type="MarginContainer" parent="Pocket"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -10.0
+margin_top = -13.0
+margin_right = 10.0
+margin_bottom = -5.0
+
+[node name="PoketItems" type="HBoxContainer" parent="Pocket/MarginContainer"]
+margin_right = 32.0
+margin_bottom = 8.0
+
+[node name="PocketItemUI" parent="Pocket/MarginContainer/PoketItems" instance=ExtResource( 10 )]
+margin_right = 8.0
+margin_bottom = 8.0
+
+[node name="PocketItemUI2" parent="Pocket/MarginContainer/PoketItems" instance=ExtResource( 10 )]
+margin_left = 12.0
+margin_right = 20.0
+margin_bottom = 8.0
+
+[node name="PocketItemUI3" parent="Pocket/MarginContainer/PoketItems" instance=ExtResource( 10 )]
+margin_left = 24.0
+margin_right = 32.0
+margin_bottom = 8.0

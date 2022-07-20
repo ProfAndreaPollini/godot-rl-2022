@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4.png" type="Texture" id=1]
 [ext_resource path="res://entites/Potion.gd" type="Script" id=2]
+[ext_resource path="res://assets/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/frames/flask_big_yellow.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2, 5 )
@@ -29,3 +30,7 @@ rect_scale = Vector2( 0.6, 0.6 )
 text = "F"
 align = 1
 valign = 1
+
+[node name="InventoryIcon" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 3 )
