@@ -3,6 +3,8 @@ extends KinematicBody2D
 
 signal moved(dx,dy)
 
+onready var inventory = $Inventory
+
 onready var weapon_position = $sword_position
 onready var weapon = get_node("Weapon").get_child(0)
 
@@ -42,6 +44,12 @@ func add_weapon(new_weapon) -> void:
 func get_entity_pivot(): 
 	return 	global_position + offset
 
+func pickup(item):
+	print("picked up item = ",item)
+	item.owner_entity = self
+	inventory.add_child(item)
+	item.visible = false
+	
 
 func _input(event):
 	if event is InputEventMouseMotion and weapon:

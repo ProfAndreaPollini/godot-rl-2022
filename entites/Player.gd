@@ -6,7 +6,7 @@ func _ready():
 	print(owner_entity)
 
 
-func _process(delta):
+func _process(_delta):
 	var dx =  int(Input.is_action_pressed("ui_right"))-int(Input.is_action_pressed("ui_left"))
 	var dy =  int(Input.is_action_pressed("ui_down"))-int(Input.is_action_pressed("ui_up"))
 	
