@@ -3,6 +3,7 @@ extends CanvasLayer
 var PocketItemUI = preload("res://entites/gui/PocketItemUI.tscn")
 
 onready var pocket = get_parent().get_node("King").pocket
+onready var inventory = get_parent().get_node("King").inventory
 onready var pocket_items = $MarginContainer/PoketItems
 
 var max_items = 5
@@ -10,7 +11,10 @@ var max_items = 5
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	EventBus.connect("pocket_modified",self,"on_pocket_modified")
+	EventBus.connect("coins_modified",self,"on_coins_modified")
 
+func on_coins_modified():
+	$MarginContainer/HBoxContainer/Label.text = str(inventory.total_coins())
 
 func on_pocket_modified():
 	print("on_pocket_modified")

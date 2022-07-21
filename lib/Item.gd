@@ -10,5 +10,4 @@ func get_property(name):
 	return properties[name]
 	
 func set_property(name,value):
-	if has_property(name):
-		properties[name] = value
+	properties[name] = value

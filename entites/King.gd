@@ -34,6 +34,7 @@ func can_equip(obj)-> bool:
 func pick_coin(coin):
 	print("pick {0}".format({0:coin}))
 	EventBus.emit_signal("pick_coin",coin)
+	inventory.add_coin(coin)
 	
 	
 func add_weapon(new_weapon) -> void:

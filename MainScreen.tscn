@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Idle.gd" type="Script" id=1]
 [ext_resource path="res://Running.gd" type="Script" id=2]
@@ -11,6 +11,75 @@
 [ext_resource path="res://Pocket.gd" type="Script" id=9]
 [ext_resource path="res://entites/gui/PocketItemUI.tscn" type="PackedScene" id=10]
 [ext_resource path="res://entites/items/LittleCoin.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/frames/coin_anim_f0.png" type="Texture" id=12]
+[ext_resource path="res://assets/Frame_mid_2.png" type="Texture" id=13]
+[ext_resource path="res://assets/Fantasy RPG NPCs - Individuel Frames/King/King_Idle_1.png" type="Texture" id=14]
+[ext_resource path="res://DialogueLayer.gd" type="Script" id=15]
+[ext_resource path="res://assets/fonts/dialogue_fonts.tres" type="DynamicFont" id=16]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://assets/fonts/Harmonic.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 12
+font_data = SubResource( 1 )
+
+[sub_resource type="Theme" id=3]
+
+[sub_resource type="Shader" id=8]
+code = "shader_type canvas_item;
+
+void fragment(){
+   vec4 col = texture(TEXTURE, UV); //read from texture
+  COLOR = abs(cos(TIME *2.0)) * col;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 8 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "hide"
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "show"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer/HBoxContainer/Label:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="MainScreen" type="Node2D"]
 position = Vector2( 1, 0 )
@@ -39,34 +108,147 @@ position = Vector2( 230, 82 )
 script = ExtResource( 9 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Pocket"]
-anchor_left = 0.5
+anchor_left = 0.05
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 0.95
 anchor_bottom = 1.0
 margin_left = -10.0
 margin_top = -13.0
 margin_right = 10.0
 margin_bottom = -5.0
 
+[node name="HBoxContainer" type="HBoxContainer" parent="Pocket/MarginContainer"]
+margin_right = 403.0
+margin_bottom = 12.0
+
+[node name="TextureRect" type="TextureRect" parent="Pocket/MarginContainer/HBoxContainer"]
+margin_right = 8.0
+margin_bottom = 12.0
+texture = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="Pocket/MarginContainer/HBoxContainer"]
+margin_left = 12.0
+margin_right = 26.0
+margin_bottom = 12.0
+custom_fonts/font = SubResource( 2 )
+text = "100"
+
 [node name="PoketItems" type="HBoxContainer" parent="Pocket/MarginContainer"]
-margin_right = 32.0
-margin_bottom = 8.0
+margin_right = 403.0
+margin_bottom = 12.0
+theme = SubResource( 3 )
+alignment = 1
 
 [node name="PocketItemUI" parent="Pocket/MarginContainer/PoketItems" instance=ExtResource( 10 )]
-margin_right = 8.0
-margin_bottom = 8.0
+margin_left = 185.0
+margin_right = 193.0
+margin_bottom = 12.0
 
 [node name="PocketItemUI2" parent="Pocket/MarginContainer/PoketItems" instance=ExtResource( 10 )]
-margin_left = 12.0
-margin_right = 20.0
-margin_bottom = 8.0
+margin_left = 197.0
+margin_right = 205.0
+margin_bottom = 12.0
 
 [node name="PocketItemUI3" parent="Pocket/MarginContainer/PoketItems" instance=ExtResource( 10 )]
-margin_left = 24.0
-margin_right = 32.0
-margin_bottom = 8.0
+margin_left = 209.0
+margin_right = 217.0
+margin_bottom = 12.0
 
 [node name="Entity" parent="." instance=ExtResource( 7 )]
 
 [node name="LittleCoin" parent="." instance=ExtResource( 11 )]
 position = Vector2( 106, 185 )
+
+[node name="LittleCoin2" parent="." instance=ExtResource( 11 )]
+position = Vector2( 84, 179 )
+
+[node name="LittleCoin3" parent="." instance=ExtResource( 11 )]
+position = Vector2( 61, 149 )
+
+[node name="DialogueLayer" type="CanvasLayer" parent="."]
+script = ExtResource( 15 )
+
+[node name="MarginContainer" type="MarginContainer" parent="DialogueLayer"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.426
+anchor_top = 0.717
+anchor_right = 0.593
+anchor_bottom = 0.717
+margin_left = -107.565
+margin_top = -53.88
+margin_right = 107.565
+margin_bottom = 53.88
+
+[node name="ColorRect" type="ColorRect" parent="DialogueLayer/MarginContainer"]
+margin_right = 286.0
+margin_bottom = 107.0
+color = Color( 0.388235, 0.0666667, 0.0666667, 0.698039 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DialogueLayer/MarginContainer"]
+margin_right = 286.0
+margin_bottom = 107.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DialogueLayer/MarginContainer/HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 107.0
+
+[node name="TextureRect" type="TextureRect" parent="DialogueLayer/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource( 14 )
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="DialogueLayer/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 36.0
+margin_right = 32.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 16 )
+text = "1/2"
+align = 2
+valign = 1
+
+[node name="TextureRect2" type="TextureRect" parent="DialogueLayer/MarginContainer/HBoxContainer/VBoxContainer"]
+material = SubResource( 9 )
+margin_left = 12.0
+margin_top = 54.0
+margin_right = 20.0
+margin_bottom = 62.0
+size_flags_horizontal = 4
+texture = ExtResource( 12 )
+
+[node name="TextureRect3" type="TextureRect" parent="DialogueLayer/MarginContainer/HBoxContainer/VBoxContainer"]
+material = SubResource( 9 )
+margin_left = 12.0
+margin_top = 66.0
+margin_right = 20.0
+margin_bottom = 74.0
+size_flags_horizontal = 4
+texture = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="DialogueLayer/MarginContainer/HBoxContainer"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 36.0
+margin_right = 286.0
+margin_bottom = 107.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 16 )
+text = "fgdfgd"
+valign = 1
+autowrap = true
+max_lines_visible = 6
+
+[node name="TextureRect" type="TextureRect" parent="DialogueLayer/MarginContainer"]
+margin_right = 286.0
+margin_bottom = 107.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DialogueLayer"]
+anims/hide = SubResource( 7 )
+anims/show = SubResource( 6 )
