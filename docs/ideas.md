@@ -8,3 +8,18 @@ MinotauroDiKyoto: 3 tipi diversi di borse/inventario che si possono comprare con
 mariodose: direi che potremmo mettere nel HUD 3 slot sempre sempre presenti di cui 2 con tasti rapidi (1 e 2) dove mettere pozioni o robe del genere e nel terzo mettere lo zaino che ti da l'inventario full completo
 
 mariodose: ti apre questo inventario dove ci sono i quadratini in base alla capienza e rarià dello zaino e a destra slot testa busto arma gambe scarpe
+
+skaman512: le spade possono avere anche 2 valori monetari. Uno di vendita e uno di acquisto. Poi possono avere un valore che è il livello minimo che devi avere per usarla. Un valore che sono i danni. E poi non so
+
+paulus1969: se abbiamo le monete dobbiamo avere un negozio per spenderle
+
+mariodose: io metterei solo un valore di acquisto , metterei che il venditore , quando acquista toglie il 30% del valore
+
+AngelOfDeath_V: potresti fare la moneta per comprare con una percentuale scelta da te ed ogni 2 giorni a uno sconto di una percentuale randomica
+
+mariodose: item deve avere queste proprietà secondo me (aggiugete o cambiate se trovate migliori) " rarità , è usabile? , attack speed , attack damage , def , integrità , prezzo acquisto "
+
+paulus1969: poi al PG diamo una sola moneta il cui valore aumenta a mano a mano che raccoglie monete e diminuisce quando acquista cose, così è la monetona stessa che funge da borsellino
+
+paulus1969: adesso farei così: la moneta scompare, il campo value del personaggio aumenta del valore contenuto nel campo value della moneta ed accanto scriviamo per un secondo "+100"
+AngelOfDeath_V: potresti fare una base della vita da del mana con due pozioni che le compri o le trovi in mappa

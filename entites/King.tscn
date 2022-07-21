@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/Fantasy RPG NPCs - Individuel Frames/King/King_Idle_3.png" type="Texture" id=1]
 [ext_resource path="res://assets/Fantasy RPG NPCs - Individuel Frames/King/King_Walk_4.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://entites/Player.gd" type="Script" id=10]
 [ext_resource path="res://entites/ItemSenseArea.gd" type="Script" id=11]
 [ext_resource path="res://entites/Inventory.gd" type="Script" id=12]
+[ext_resource path="res://entites/Pocket.gd" type="Script" id=13]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -69,6 +70,9 @@ script = ExtResource( 11 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemSenseArea"]
 position = Vector2( 0, -10 )
 shape = SubResource( 3 )
+
+[node name="Pocket" type="Node" parent="."]
+script = ExtResource( 13 )
 
 [connection signal="area_entered" from="ItemSenseArea" to="ItemSenseArea" method="_on_ItemSenseArea_area_entered"]
 [connection signal="area_exited" from="ItemSenseArea" to="ItemSenseArea" method="_on_ItemSenseArea_area_exited"]

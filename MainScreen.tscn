@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Idle.gd" type="Script" id=1]
 [ext_resource path="res://Running.gd" type="Script" id=2]
@@ -6,9 +6,11 @@
 [ext_resource path="res://MainScreen.gd" type="Script" id=4]
 [ext_resource path="res://entites/Sword.tscn" type="PackedScene" id=5]
 [ext_resource path="res://entites/Potion.tscn" type="PackedScene" id=6]
+[ext_resource path="res://lib/ecs/Entity.tscn" type="PackedScene" id=7]
 [ext_resource path="res://lib/StateManager.gd" type="Script" id=8]
 [ext_resource path="res://Pocket.gd" type="Script" id=9]
 [ext_resource path="res://entites/gui/PocketItemUI.tscn" type="PackedScene" id=10]
+[ext_resource path="res://entites/items/LittleCoin.tscn" type="PackedScene" id=11]
 
 [node name="MainScreen" type="Node2D"]
 position = Vector2( 1, 0 )
@@ -63,3 +65,8 @@ margin_bottom = 8.0
 margin_left = 24.0
 margin_right = 32.0
 margin_bottom = 8.0
+
+[node name="Entity" parent="." instance=ExtResource( 7 )]
+
+[node name="LittleCoin" parent="." instance=ExtResource( 11 )]
+position = Vector2( 106, 185 )

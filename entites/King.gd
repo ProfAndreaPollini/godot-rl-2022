@@ -4,6 +4,7 @@ extends KinematicBody2D
 signal moved(dx,dy)
 
 onready var inventory = $Inventory
+onready var pocket = $Pocket
 
 onready var weapon_position = $sword_position
 onready var weapon = get_node("Weapon").get_child(0)
@@ -30,6 +31,10 @@ func _physics_process(delta):
 func can_equip(obj)-> bool:
 	return obj.get_groups().has("weapon") and $Weapon.get_child_count() == 0
 	
+func pick_coin(coin):
+	print("pick {0}".format({0:coin}))
+	EventBus.emit_signal("pick_coin",coin)
+	
 	
 func add_weapon(new_weapon) -> void:
 	$Weapon.add_child(new_weapon) 
@@ -48,7 +53,7 @@ func pickup(item):
 	print("picked up item = ",item)
 	if inventory.has_free_slot():
 		item.owner_entity = self
-		inventory.add_item(item)
+		pocket.add_item(item)
 		item.visible = false
 	
 

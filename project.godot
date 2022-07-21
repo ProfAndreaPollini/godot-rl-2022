@@ -10,6 +10,16 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "Component",
+"language": "GDScript",
+"path": "res://lib/ecs/Component.gd"
+}, {
+"base": "Node2D",
+"class": "Item",
+"language": "GDScript",
+"path": "res://lib/Item.gd"
+}, {
+"base": "Node",
 "class": "State",
 "language": "GDScript",
 "path": "res://lib/State.gd"
@@ -18,10 +28,18 @@ _global_script_classes=[ {
 "class": "StateManager",
 "language": "GDScript",
 "path": "res://lib/StateManager.gd"
+}, {
+"base": "Node",
+"class": "System",
+"language": "GDScript",
+"path": "res://lib/ecs/System.gd"
 } ]
 _global_script_class_icons={
+"Component": "",
+"Item": "",
 "State": "",
-"StateManager": ""
+"StateManager": "",
+"System": ""
 }
 
 [application]

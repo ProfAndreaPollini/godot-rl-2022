@@ -2,18 +2,18 @@ extends CanvasLayer
 
 var PocketItemUI = preload("res://entites/gui/PocketItemUI.tscn")
 
-onready var inventory = get_parent().get_node("King/Inventory")
+onready var pocket = get_parent().get_node("King").pocket
 onready var pocket_items = $MarginContainer/PoketItems
 
 var max_items = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	EventBus.connect("inventory_modified",self,"on_inventory_modified")
+	EventBus.connect("pocket_modified",self,"on_pocket_modified")
 
 
-func on_inventory_modified():
-	print("on_inventory_modified")
+func on_pocket_modified():
+	print("on_pocket_modified")
 	var items = pocket_items.get_child_count()
 	print("items {0} to delete".format({0:pocket_items.get_child_count()}))
 	while pocket_items.get_child_count()>0:
@@ -23,10 +23,10 @@ func on_inventory_modified():
 		item.queue_free()
 		
 	print("items {0} left".format({0:pocket_items.get_child_count()}))	
-	print("Creating {0} items".format({0:inventory.get_child_count()}))
-	for i in range(inventory.get_child_count()):
-		print("{0}/{1}".format({0:i,1:inventory.get_child_count()}))
-		var inventory_item = inventory.get_child(i)
+	print("Creating {0} items".format({0:pocket.get_child_count()}))
+	for i in range(pocket.get_child_count()):
+		print("{0}/{1}".format({0:i,1:pocket.get_child_count()}))
+		var inventory_item = pocket.get_child(i)
 		
 		var pocket_item = PocketItemUI.instance()
 		
