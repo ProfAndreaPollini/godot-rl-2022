@@ -141,12 +141,13 @@ func _build_tile_map():
 				
 		_tile_map.append(tile_map_row)
 		
-	_cleanup_single_tiles()
 	_detect_lakes()
 	_detect_lakes_borders()
 	
 	if generate_rivers:
 		_generate_rivers()
+
+	_cleanup_single_tiles()
 		
 	perf_logger.stop()
 
@@ -343,8 +344,79 @@ func _generate_river(astar: AStar2D, source: Vector2, destination: Vector2):
 	var destination_id = _calculate_astar_id(int(destination.x), int(destination.y))
 	var points = astar.get_point_path(source_id, destination_id)
 	print("[Terrain] River points: {0}".format({0:points.size()}))
+	var prev_point = null
 	for point in points:
 		_tile_map[int(point.y)][int(point.x)] = Tiles.Water
+		
+		if _is_moving_up(prev_point, point) or _is_moving_down(prev_point, point):
+			if _is_coordinate_in_tilemap(int(point.x) - 1, int(prev_point.y)) and \
+				_tile_map[int(prev_point.y)][int(point.x) - 1] == Tiles.Water:
+				_tile_map[int(point.y)][int(point.x) - 1] = Tiles.Water
+			elif _is_coordinate_in_tilemap(int(point.x) + 1, int(prev_point.y)) and \
+				_tile_map[int(prev_point.y)][int(point.x) + 1] == Tiles.Water:
+				_tile_map[int(point.y)][int(point.x) + 1] = Tiles.Water
+		elif _is_moving_left(prev_point, point) or _is_moving_right(prev_point, point):
+			if _is_coordinate_in_tilemap(int(prev_point.x), int(point.y) - 1) and \
+				_tile_map[int(point.y) - 1][int(prev_point.x)] == Tiles.Water:
+				_tile_map[int(point.y) - 1][int(point.x)] = Tiles.Water
+			elif _is_coordinate_in_tilemap(int(prev_point.x), int(point.y) + 1) and \
+				_tile_map[int(point.y) + 1][int(prev_point.x)] == Tiles.Water:
+				_tile_map[int(point.y) + 1][int(point.x)] = Tiles.Water
+		else: # if we can't detect where to place the tile, we create a little square 3x3
+			if _is_coordinate_in_tilemap(int(point.x), int(point.y) - 1):
+				_tile_map[int(point.y) - 1][int(point.x)] = Tiles.Water
+			if _is_coordinate_in_tilemap(int(point.x - 1), int(point.y) - 1):
+				_tile_map[int(point.y) - 1][int(point.x - 1)] = Tiles.Water
+			if _is_coordinate_in_tilemap(int(point.x + 1), int(point.y) - 1):
+				_tile_map[int(point.y) - 1][int(point.x) + 1] = Tiles.Water
+			if _is_coordinate_in_tilemap(int(point.x), int(point.y) + 1):
+				_tile_map[int(point.y) + 1][int(point.x)] = Tiles.Water
+			if _is_coordinate_in_tilemap(int(point.x - 1), int(point.y) + 1):
+				_tile_map[int(point.y) + 1][int(point.x - 1)] = Tiles.Water
+			if _is_coordinate_in_tilemap(int(point.x + 1), int(point.y) + 1):
+				_tile_map[int(point.y) + 1][int(point.x) + 1] = Tiles.Water
+			if _is_coordinate_in_tilemap(int(point.x - 1), int(point.y)):
+				_tile_map[int(point.y)][int(point.x - 1)] = Tiles.Water
+			if _is_coordinate_in_tilemap(int(point.x + 1), int(point.y)):
+				_tile_map[int(point.y)][int(point.x) + 1] = Tiles.Water
+		
+		#if _is_moving_up(prev_point, point) and _is_moving_left(prev_point, point):
+		#	_tile_map[int(point.y)][int(point.x) + 1] = Tiles.Water
+
+		#elif _is_moving_up(prev_point, point) and _is_moving_right(prev_point, point):
+		#	_tile_map[int(point.y)][int(point.x) - 1] = Tiles.Water
+		
+		#elif _is_moving_down(prev_point, point) and _is_moving_left(prev_point, point):
+		#	_tile_map[int(point.y)][int(point.x) + 1] = Tiles.Water
+
+		#elif _is_moving_down(prev_point, point) and _is_moving_right(prev_point, point):
+		#	_tile_map[int(point.y)][int(point.x) - 1] = Tiles.Water
+
+		prev_point = point
+		
+func _is_moving_up(prev_point, current_point):
+	if prev_point == null or current_point == null:
+		return false
+		
+	return prev_point.y < current_point.y
+
+func _is_moving_down(prev_point, current_point):
+	if prev_point == null or current_point == null:
+		return false
+		
+	return prev_point.y > current_point.y
+
+func _is_moving_left(prev_point, current_point):
+	if prev_point == null or current_point == null:
+		return false
+		
+	return prev_point.x > current_point.x
+
+func _is_moving_right(prev_point, current_point):
+	if prev_point == null or current_point == null:
+		return false
+		
+	return prev_point.x < current_point.x
 	
 func _calculate_astar_id(x: int, y: int):
 	return (y * _tile_map_width) + x + 1
