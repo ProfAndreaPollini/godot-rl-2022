@@ -45,6 +45,7 @@ _global_script_class_icons={
 [application]
 
 config/name="godot-rl-2022"
+run/main_scene="res://MainScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
