@@ -6,7 +6,7 @@ signal moved(dx,dy)
 onready var inventory = $Inventory
 onready var pocket = $Pocket
 
-onready var weapon_position = $sword_position
+onready var center_point = $CenterPosition
 onready var weapon = get_node("Weapon").get_child(0)
 
 export  var offset: Vector2 = Vector2.ZERO
@@ -14,8 +14,14 @@ export  var offset: Vector2 = Vector2.ZERO
 onready var entity_pivot: Vector2 = Vector2.ZERO setget ,get_entity_pivot
 var direction := Vector2.ZERO 
 
+var Player = load("res://entites/Player.gd")
+
+var player
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	player = Player.new()
+	player.setup(self)
 	connect("moved",self,"on_moved")
 	
 func on_moved(dx: float ,dy : float ) -> void:
@@ -25,9 +31,28 @@ func on_moved(dx: float ,dy : float ) -> void:
 #
 #		weapon.global_position = get_entity_pivot()
 	
-func _physics_process(delta):
-	pass
-	
+func _physics_process(_delta):
+	player.update_player(_delta)
+	$AnimatedSprite.flip_h = (get_global_mouse_position() - global_position).dot(Vector2.RIGHT) < 0
+	if weapon:
+		direction = (get_global_mouse_position() - get_entity_pivot()).normalized()
+		
+
+		#weapon.global_position = global_position #+ 10*direction
+#		weapon.global_position.x = clamp(weapon.global_position.x,global_position.x-5,global_position.x+5)
+#		weapon.global_position.y = clamp(weapon.global_position.y,global_position.y-20,global_position.y)
+#
+#		weapon.look_at(global_position + 200*direction)
+#
+#		weapon.rotate(deg2rad(90))
+		weapon.on_mouse_moved(get_entity_pivot(),direction)
+	#_draw()
+
+func _draw():
+	draw_circle(Vector2.ZERO,2,Color.blue)
+	draw_circle(to_local(get_entity_pivot()),2,Color.green
+	)
+
 func can_equip(obj)-> bool:
 	return obj.get_groups().has("weapon") and $Weapon.get_child_count() == 0
 	
@@ -41,14 +66,14 @@ func add_weapon(new_weapon) -> void:
 	$Weapon.add_child(new_weapon) 
 	new_weapon.owner_entity = self
 	new_weapon.position = Vector2.ZERO
-	new_weapon.global_position = weapon_position.global_position
+	#new_weapon.global_position = weapon_position.global_position
 	weapon = new_weapon
 	
 	#weapon.global_position = get_entity_pivot() 
 	print(weapon.owner_entity)
 	
 func get_entity_pivot(): 
-	return 	global_position + offset
+	return 	global_position + center_point.position
 
 func pickup(item):
 	print("picked up item = ",item)
@@ -59,18 +84,18 @@ func pickup(item):
 	
 
 func _input(event):
-	if event is InputEventMouseMotion and weapon:
+	if (event is InputEventMouseMotion  or event is InputEventKey) and weapon:
 		
-		direction = (event.position - get_entity_pivot()).normalized()
-		#weapon.on_mouse_moved(get_entity_pivot(),direction)
-
-		weapon.global_position = global_position + 10*direction
-		weapon.global_position.x = clamp(weapon.global_position.x,global_position.x-5,global_position.x+5)
-		weapon.global_position.y = clamp(weapon.global_position.y,global_position.y-20,global_position.y)
-		
-		weapon.look_at(global_position + 200*direction)
-		
-		weapon.rotate(deg2rad(90))
-		print(weapon.global_position)
-		
+#		direction = (get_global_mouse_position() - get_entity_pivot()).normalized()
+#		#weapon.on_mouse_moved(get_entity_pivot(),direction)
+#
+#		weapon.global_position = global_position + 10*direction
+#		weapon.global_position.x = clamp(weapon.global_position.x,global_position.x-5,global_position.x+5)
+#		weapon.global_position.y = clamp(weapon.global_position.y,global_position.y-20,global_position.y)
+#
+#		weapon.look_at(global_position + 200*direction)
+#
+#		weapon.rotate(deg2rad(90))
+		#print(weapon.global_position)
+		pass
 

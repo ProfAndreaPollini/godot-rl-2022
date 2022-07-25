@@ -3,6 +3,9 @@ extends CanvasLayer
 var sentences = []
 var current = 0
 
+func _ready():
+	set_process_input(false)
+
 func say(text):
 	sentences = text
 	current = 0
@@ -28,4 +31,6 @@ func _process(delta):
 	
 	
 func hide():
+	set_process_input(false)
 	$AnimationPlayer.play("hide")
+	
