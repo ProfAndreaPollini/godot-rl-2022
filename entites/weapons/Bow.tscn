@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://entites/weapons/Weapon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/frames/weapon_bow.png" type="Texture" id=2]
+[ext_resource path="res://entites/weapons/Bow.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6, 14 )
+
+[node name="Bow" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+texture = ExtResource( 2 )
+offset = Vector2( 10, 0 )
+
+[node name="BodyArea" type="Area2D" parent="." index="2" groups=["weapon"]]
+collision_layer = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea" index="0"]
+position = Vector2( 10, 0 )
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="BodyArea" to="." method="_on_BodyArea_body_entered"]

@@ -1,19 +1,23 @@
 extends Node
 
-onready var owner_entity = get_parent().get_parent()
+onready var owner_entity #= get_parent().get_parent()
 
-func _ready():
+func setup(_owner_entity):
+	owner_entity = _owner_entity
 	print(owner_entity)
 	if not owner_entity.is_in_group("player"):
 		owner_entity.add_to_group("player")
 	connect("child_exiting_tree",self,"on_destroy")
+
+
+	
 
 func on_destroy():
 	if  owner_entity.is_in_group("player"):
 		owner_entity.remove_from_group("player")
 
 
-func _process(_delta):
+func update_player(_delta):
 	var dx =  int(Input.is_action_pressed("ui_right"))-int(Input.is_action_pressed("ui_left"))
 	var dy =  int(Input.is_action_pressed("ui_down"))-int(Input.is_action_pressed("ui_up"))
 	

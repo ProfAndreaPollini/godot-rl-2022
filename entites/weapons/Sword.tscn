@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4.png" type="Texture" id=1]
-[ext_resource path="res://entites/Sword.gd" type="Script" id=2]
+[ext_resource path="res://entites/weapons/Sword.gd" type="Script" id=1]
+[ext_resource path="res://assets/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4.png" type="Texture" id=2]
 
 [sub_resource type="SegmentShape2D" id=1]
 b = Vector2( 0, 12 )
@@ -9,13 +9,15 @@ b = Vector2( 0, 12 )
 [node name="Sword" type="Area2D" groups=["weapon"]]
 position = Vector2( 24, 0 )
 rotation = 1.5708
-script = ExtResource( 2 )
+collision_layer = 4
+collision_mask = 16
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 centered = false
 offset = Vector2( -3, -12 )
 region_enabled = true

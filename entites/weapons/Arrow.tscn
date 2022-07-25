@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://lib/ecs/Entity.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entites/weapons/Arrow.gd" type="Script" id=2]
+[ext_resource path="res://assets/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/frames/weapon_arrow.png" type="Texture" id=3]
+[ext_resource path="res://assets/testsmoke.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 2.5, 10 )
+
+[sub_resource type="CanvasItemMaterial" id=2]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.21393, 0.836364 ), 0.0, 0.0, 0, 0, Vector2( 0.716418, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.269663, 0.994382 )
+colors = PoolColorArray( 0.788086, 0.726517, 0.726517, 1, 0.937255, 0.921569, 0.921569, 0.686275, 1, 1, 1, 0 )
+
+[node name="Arrow" groups=["bullet"] instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Body" type="KinematicBody2D" parent="." index="1"]
+rotation = 1.5708
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body" index="0"]
+position = Vector2( -0.5, -10 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Body" index="1"]
+texture = ExtResource( 3 )
+centered = false
+offset = Vector2( -4, -20 )
+
+[node name="Smoke" type="CPUParticles2D" parent="Body" index="2"]
+material = SubResource( 2 )
+emitting = false
+amount = 64
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.8
+lifetime_randomness = 0.87
+local_coords = false
+texture = ExtResource( 4 )
+gravity = Vector2( 0, 0 )
+initial_velocity = 1.0
+initial_velocity_random = 0.32
+angular_velocity = 5.0
+angular_velocity_random = 0.86
+angle = 333.3
+angle_random = 1.0
+scale_amount_curve = SubResource( 3 )
+color_ramp = SubResource( 4 )
+anim_speed = 0.5
+anim_speed_random = 1.0
