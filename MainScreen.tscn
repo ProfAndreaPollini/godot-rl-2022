@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Idle.gd" type="Script" id=1]
 [ext_resource path="res://Running.gd" type="Script" id=2]
@@ -19,33 +19,13 @@
 [ext_resource path="res://entites/weapons/SimpleSword.tscn" type="PackedScene" id=17]
 [ext_resource path="res://entites/weapons/Bow.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/0x72_16x16DungeonTileset.v4.png" type="Texture" id=19]
+[ext_resource path="res://assets/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/frames/chest_empty_open_anim_f0.png" type="Texture" id=20]
+[ext_resource path="res://assets/ui/inventory_ui.png" type="Texture" id=21]
+[ext_resource path="res://ui/InventoryUIIcon.gd" type="Script" id=22]
+[ext_resource path="res://InventoryLayer.gd" type="Script" id=23]
 
 [sub_resource type="ConvexPolygonShape2D" id=11]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 16, 16, 16 )
-
-[sub_resource type="ConvexPolygonShape2D" id=12]
-points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
-
-[sub_resource type="ConvexPolygonShape2D" id=13]
-points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
-
-[sub_resource type="ConvexPolygonShape2D" id=14]
-points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
-
-[sub_resource type="ConvexPolygonShape2D" id=15]
-points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
-
-[sub_resource type="ConvexPolygonShape2D" id=16]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
-
-[sub_resource type="ConvexPolygonShape2D" id=17]
-points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
-
-[sub_resource type="ConvexPolygonShape2D" id=18]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
-
-[sub_resource type="ConvexPolygonShape2D" id=19]
-points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [sub_resource type="TileSet" id=10]
 0/name = "0x72_16x16DungeonTileset.v4.png 0"
@@ -78,49 +58,49 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 "autotile_coord": Vector2( 0, 1 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 12 ),
+"shape": SubResource( 11 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 1, 1 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 13 ),
+"shape": SubResource( 11 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 2, 1 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 14 ),
+"shape": SubResource( 11 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 3, 1 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 15 ),
+"shape": SubResource( 11 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 3, 1 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 16 ),
+"shape": SubResource( 11 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 0, 4 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 17 ),
+"shape": SubResource( 11 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 0, 4 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 18 ),
+"shape": SubResource( 11 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 1, 4 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 19 ),
+"shape": SubResource( 11 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
@@ -238,12 +218,55 @@ script = ExtResource( 4 )
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 10 )
 cell_size = Vector2( 16, 16 )
+collision_layer = 32
+collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 65538, 0, 2, 65539, 0, 2, 65540, 0, 2, 65541, 0, 2, 65542, 0, 2, 65543, 0, 2, 65544, 0, 2, 65545, 0, 2, 65546, 0, 2, 65547, 0, 2, 65548, 0, 2, 65549, 0, 2, 65550, 0, 2, 65551, 0, 2, 65552, 0, 2, 65553, 0, 2, 65554, 0, 2, 65555, 0, 2, 131074, 0, 65536, 131075, 0, 65536, 131076, 1, 3, 131077, 0, 65536, 131078, 0, 262149, 131079, 0, 65536, 131080, 0, 65536, 131081, 0, 65536, 131082, 1, 5, 131083, 0, 65536, 131084, 0, 65536, 131085, 0, 65536, 131086, 0, 65536, 131087, 0, 65539, 131088, 0, 65536, 131089, 0, 65536, 131090, 0, 65536, 131091, 0, 65536, 196610, 0, 65536, 196611, 0, 131072, 196612, 0, 131072, 196613, 0, 131072, 196614, 0, 327685, 196615, 0, 131072, 196616, 0, 131072, 196617, 0, 131072, 196618, 0, 131072, 196619, 0, 131072, 196620, 0, 131072, 196621, 0, 131072, 196622, 0, 131072, 196623, 0, 131075, 196624, 0, 131072, 196625, 0, 131072, 196626, 0, 131072, 196627, 0, 65536, 262146, 0, 65536, 262147, 0, 196610, 262148, 0, 196610, 262149, 0, 196610, 262150, 0, 196610, 262151, 0, 196610, 262152, 0, 196610, 262153, 0, 196610, 262154, 0, 196610, 262155, 0, 196610, 262156, 0, 196610, 262157, 0, 196610, 262158, 0, 196610, 262159, 0, 196610, 262160, 0, 196610, 262161, 0, 196610, 262162, 0, 196610, 262163, 0, 65536, 327682, 0, 65536, 327683, 0, 196610, 327684, 0, 196610, 327685, 0, 196610, 327686, 0, 196610, 327687, 0, 196610, 327688, 0, 196610, 327689, 0, 196610, 327690, 0, 196610, 327691, 0, 196610, 327692, 0, 196610, 327693, 0, 196610, 327694, 0, 196610, 327695, 0, 196610, 327696, 0, 196610, 327697, 0, 196610, 327698, 0, 196610, 327699, 0, 65536, 393218, 0, 65536, 393219, 0, 196610, 393220, 0, 196610, 393221, 0, 196610, 393222, 0, 196610, 393223, 0, 393216, 393224, 0, 393217, 393225, 0, 393217, 393226, 0, 393217, 393227, 0, 393217, 393228, 0, 393219, 393229, 0, 196610, 393230, 0, 196610, 393231, 0, 196610, 393232, 0, 196610, 393233, 0, 196610, 393234, 0, 196610, 393235, 0, 65536, 458754, 0, 65536, 458755, 0, 196610, 458756, 0, 196610, 458757, 0, 196610, 458758, 0, 196610, 458759, 0, 458752, 458760, 0, 458756, 458761, 0, 458756, 458762, 0, 458756, 458763, 0, 458756, 458764, 0, 458755, 458765, 0, 196610, 458766, 0, 196610, 458767, 0, 196610, 458768, 0, 196610, 458769, 0, 196610, 458770, 0, 196610, 458771, 0, 65536, 524290, 0, 65536, 524291, 0, 196610, 524292, 0, 196610, 524293, 0, 196610, 524294, 0, 196610, 524295, 0, 524288, 524296, 0, 524289, 524297, 0, 524289, 524298, 0, 524289, 524299, 0, 524289, 524300, 0, 458755, 524301, 0, 196610, 524302, 0, 196610, 524303, 0, 196610, 524304, 0, 196610, 524305, 0, 196610, 524306, 0, 196610, 524307, 0, 65536, 589826, 0, 65536, 589827, 0, 196610, 589828, 0, 196610, 589829, 0, 196610, 589830, 0, 196610, 589831, 0, 196610, 589832, 0, 196610, 589833, 0, 196610, 589834, 0, 196610, 589835, 0, 196610, 589836, 0, 458755, 589837, 0, 196610, 589838, 0, 196610, 589839, 0, 196610, 589840, 0, 196610, 589841, 0, 196610, 589842, 0, 196610, 589843, 0, 65536, 655362, 0, 65536, 655363, 0, 196610, 655364, 0, 196610, 655365, 0, 196610, 655366, 0, 196610, 655367, 0, 196610, 655368, 0, 196610, 655369, 0, 196610, 655370, 0, 196610, 655371, 0, 196610, 655372, 0, 196610, 655373, 0, 196610, 655374, 0, 196610, 655375, 0, 196610, 655376, 0, 196610, 655377, 0, 196610, 655378, 0, 196610, 655379, 0, 65536, 720898, 0, 65536, 720899, 0, 196610, 720900, 0, 196610, 720901, 0, 196610, 720902, 0, 196610, 720903, 0, 196610, 720904, 0, 196610, 720905, 0, 196610, 720906, 0, 196610, 720907, 0, 196610, 720908, 0, 196610, 720909, 0, 196610, 720910, 0, 196610, 720911, 0, 196610, 720912, 0, 196610, 720913, 0, 196610, 720914, 0, 196610, 720915, 0, 65536, 786434, 0, 65536, 786435, 0, 196610, 786436, 0, 196610, 786437, 0, 196610, 786438, 0, 196610, 786439, 0, 196610, 786440, 0, 196610, 786441, 0, 196610, 786442, 0, 196610, 786443, 0, 196610, 786444, 0, 196610, 786445, 0, 196610, 786446, 0, 196610, 786447, 0, 196610, 786448, 0, 196610, 786449, 0, 196610, 786450, 0, 196610, 786451, 0, 65536, 851970, 0, 65536, 851971, 0, 65536, 851972, 0, 65536, 851973, 0, 65536, 851974, 0, 65536, 851975, 0, 65536, 851976, 0, 65536, 851977, 0, 65536, 851978, 0, 65536, 851979, 0, 65536, 851980, 0, 65536, 851981, 0, 65536, 851982, 0, 65536, 851983, 0, 65536, 851984, 0, 65536, 851985, 0, 65536, 851986, 0, 65536, 851987, 0, 65536 )
+
+[node name="InventoryLayer" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource( 23 )
+
+[node name="TextureRect" type="TextureRect" parent="InventoryLayer"]
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.2
+anchor_bottom = 0.2
+rect_scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 21 )
+stretch_mode = 4
+
+[node name="TextureButton" type="TextureButton" parent="InventoryLayer"]
+anchor_left = 0.495
+anchor_right = 0.523
+margin_left = 31.13
+margin_top = 49.0
+margin_right = 47.13
+margin_bottom = 65.0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="slot0" type="TextureRect" parent="InventoryLayer"]
+anchor_left = 0.219
+anchor_top = 0.316
+anchor_right = 0.228
+anchor_bottom = 0.316
+margin_left = 2.706
+margin_top = 0.159996
+margin_right = 18.872
+margin_bottom = 19.16
+
+[node name="slot1" type="TextureRect" parent="InventoryLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
 
 [node name="King" parent="." instance=ExtResource( 3 )]
 position = Vector2( 191, 144 )
 offset = Vector2( 10, -8 )
+
+[node name="Camera2D" type="Camera2D" parent="King"]
+current = true
+zoom = Vector2( 0.75, 0.75 )
 
 [node name="StateManager" type="Node" parent="."]
 script = ExtResource( 8 )
@@ -275,40 +298,57 @@ margin_bottom = -5.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Pocket/MarginContainer"]
 margin_right = 403.0
-margin_bottom = 12.0
+margin_bottom = 16.0
 
 [node name="TextureRect" type="TextureRect" parent="Pocket/MarginContainer/HBoxContainer"]
 margin_right = 8.0
-margin_bottom = 12.0
+margin_bottom = 16.0
 texture = ExtResource( 12 )
 
 [node name="Label" type="Label" parent="Pocket/MarginContainer/HBoxContainer"]
 margin_left = 12.0
+margin_top = 2.0
 margin_right = 26.0
-margin_bottom = 12.0
+margin_bottom = 14.0
 custom_fonts/font = SubResource( 2 )
 text = "100"
 
 [node name="PoketItems" type="HBoxContainer" parent="Pocket/MarginContainer"]
 margin_right = 403.0
-margin_bottom = 12.0
+margin_bottom = 16.0
+size_flags_vertical = 9
 theme = SubResource( 3 )
 alignment = 1
 
 [node name="PocketItemUI" parent="Pocket/MarginContainer/PoketItems" instance=ExtResource( 10 )]
 margin_left = 185.0
 margin_right = 193.0
-margin_bottom = 12.0
+margin_bottom = 16.0
 
 [node name="PocketItemUI2" parent="Pocket/MarginContainer/PoketItems" instance=ExtResource( 10 )]
 margin_left = 197.0
 margin_right = 205.0
-margin_bottom = 12.0
+margin_bottom = 16.0
 
 [node name="PocketItemUI3" parent="Pocket/MarginContainer/PoketItems" instance=ExtResource( 10 )]
 margin_left = 209.0
 margin_right = 217.0
-margin_bottom = 12.0
+margin_bottom = 16.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Pocket/MarginContainer"]
+margin_left = 387.0
+margin_right = 403.0
+margin_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="InventoryUIIcon" type="TextureRect" parent="Pocket/MarginContainer/HBoxContainer2"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 20 )
+script = ExtResource( 22 )
 
 [node name="Entity" parent="." instance=ExtResource( 7 )]
 
@@ -415,3 +455,6 @@ position = Vector2( 78, 98 )
 
 [node name="Bow" parent="." instance=ExtResource( 18 )]
 position = Vector2( 134, 86 )
+
+[connection signal="button_down" from="InventoryLayer/TextureButton" to="InventoryLayer" method="_on_TextureButton_button_down"]
+[connection signal="gui_input" from="Pocket/MarginContainer/HBoxContainer2/InventoryUIIcon" to="Pocket/MarginContainer/HBoxContainer2/InventoryUIIcon" method="_on_InventoryUIIcon_gui_input"]

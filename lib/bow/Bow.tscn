@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://lib/bow/Bow.gd" type="Script" id=1]
+[ext_resource path="res://assets/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/frames/weapon_bow.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6, 14 )
+
+[node name="Bow" type="Node2D"]
+script = ExtResource( 1 )
+icon_texture = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+offset = Vector2( 10, 0 )
+
+[node name="BodyArea" type="Area2D" parent="." groups=["weapon"]]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea"]
+position = Vector2( 10, 0 )
+shape = SubResource( 1 )

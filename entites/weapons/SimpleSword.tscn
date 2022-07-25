@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://entites/weapons/Weapon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4.png" type="Texture" id=2]
 [ext_resource path="res://entites/weapons/SimpleSword.gd" type="Script" id=3]
+[ext_resource path="res://assets/0x72_DungeonTilesetII_v1.4/0x72_DungeonTilesetII_v1.4/frames/weapon_knife.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2, 3.5 )
@@ -11,6 +12,7 @@ extents = Vector2( 2, 3.5 )
 position = Vector2( 24, 0 )
 rotation = 1.5708
 script = ExtResource( 3 )
+icon_texture = ExtResource( 4 )
 
 [node name="SwordArea" type="Area2D" parent="." index="1"]
 

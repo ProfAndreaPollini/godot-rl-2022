@@ -5,3 +5,10 @@ Mr. JUNKER MSX Pixel/Bitmap Font.
 
 Mr. JUNKER MSX.ttf
 License: Attribution 4.0 International (CC BY 4.0)
+
+
+https://szadiart.itch.io/rpg-main-character
+
+Generic Character Asset v 0.2
+
+https://brullov.itch.io/generic-char-asset

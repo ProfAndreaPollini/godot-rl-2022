@@ -7,6 +7,8 @@ var direction = Vector2.ZERO
 var is_firing := false
 var old_global_position := Vector2.ZERO
 
+export(Texture)  var icon_texture = null
+
 func on_mouse_moved(pos: Vector2,dir: Vector2):
 	direction = dir
 	var weapon_position =  pos + 10*dir
@@ -37,6 +39,6 @@ func equip_or_put_into_inventory(entity,obj):
 		entity.add_weapon(obj)
 		
 	elif entity.inventory.has_free_slot():
-		
+		obj.get_parent().remove_child(obj)
 		entity.inventory.add_item(obj)
 		obj.visible = false

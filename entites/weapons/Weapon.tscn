@@ -5,3 +5,4 @@
 
 [node name="Weapon" groups=["weapon"] instance=ExtResource( 2 )]
 script = ExtResource( 1 )
+icon_texture = null

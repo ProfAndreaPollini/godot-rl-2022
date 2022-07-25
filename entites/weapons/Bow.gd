@@ -50,10 +50,10 @@ func on_mouse_moved(pos: Vector2,dir: Vector2):
 	#print("ANGLE = ",rotation)
 	#print("pos = ",global_position)
 	#rotate(deg2rad(90))
-	_draw()
-
-func _draw():
-	draw_circle(Vector2.ZERO,2,Color.rebeccapurple)
+#	_draw()
+#
+#func _draw():
+#	draw_circle(Vector2.ZERO,2,Color.rebeccapurple)
 
 func _on_BodyArea_body_entered(entity):
 	print("Bow: ",entity)

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://lib/SenseArea.gd" type="Script" id=1]
+
+[sub_resource type="CircleShape2D" id=22]
+radius = 25.423
+
+[node name="SenseArea" type="Area2D"]
+script = ExtResource( 1 )
+entity = NodePath("..")
+
+[node name="SensingCircle" type="CollisionShape2D" parent="."]
+position = Vector2( 1, 1 )
+shape = SubResource( 22 )

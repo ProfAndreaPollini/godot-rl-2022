@@ -101,6 +101,7 @@ debug_mes_test={
 2d_physics/layer_3="weapons"
 2d_physics/layer_4="bullets"
 2d_physics/layer_5="enemies"
+2d_physics/layer_6="walls"
 
 [physics]
 
