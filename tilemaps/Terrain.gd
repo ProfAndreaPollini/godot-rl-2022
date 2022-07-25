@@ -39,7 +39,6 @@ const HILL_TILES = {
 # We want our base tilemap to be bigger then our draw view,
 # so we can calculate lakes and other stuff that go outside our view.
 const TILE_MAP_EXTRA_SIZE = 100
-const RIVER_ASTAR_WEIGHT_MULTIPLIER = 10000
 
 enum Tiles { Grass, Water, Hill }
 
@@ -64,10 +63,17 @@ export (float) var grass_period = 50.0
 export (float) var grass_lacunarity = 0.7
 export (float) var grass_persistence = 0.0
 
+export (int) var rivers_seed = 3
+export (int) var rivers_octaves = 1
+export (float) var rivers_period = 1.0
+export (float) var rivers_lacunarity = 0.5
+export (float) var rivers_persistence = 2.0
+
 var _perf_logger = preload("../utils/PerfLogger.gd")
 
 var _terrain_noise: OpenSimplexNoise = OpenSimplexNoise.new()
 var _grass_noise: OpenSimplexNoise = OpenSimplexNoise.new()
+var _rivers_noise: OpenSimplexNoise = OpenSimplexNoise.new()
 
 var _tile_map: Array = []
 var _tile_map_width: int = 0
@@ -109,6 +115,12 @@ func _generate_world():
 	_grass_noise.lacunarity = grass_lacunarity
 	_grass_noise.persistence = grass_persistence
 	
+	_rivers_noise.seed = rivers_seed
+	_rivers_noise.octaves = rivers_octaves
+	_rivers_noise.period = rivers_period
+	_rivers_noise.lacunarity = rivers_lacunarity
+	_rivers_noise.persistence = rivers_persistence
+
 	clear()
 
 	_build_tile_map()
@@ -422,7 +434,7 @@ func _calculate_astar_id(x: int, y: int):
 	return (y * _tile_map_width) + x + 1
 	
 func _calculate_astar_weight(x: int, y: int):
-	return ((_terrain_noise.get_noise_2d(float(x), float(y)) * -1) + 1.0) * RIVER_ASTAR_WEIGHT_MULTIPLIER
+	return _rivers_noise.get_noise_2d(float(x), float(y)) + 1.0
 	
 #func _sort_points_by_distance(points: Array):
 #	if points.size() == 0:
