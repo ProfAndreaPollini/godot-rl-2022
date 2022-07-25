@@ -199,10 +199,7 @@ func _detect_lakes_borders():
 			for move_position in move_positions:
 				var x = point.x + move_position[0]
 				var y = point.y + move_position[1]
-				if x < 0 or y < 0 or x >= _tile_map_width or y >= _tile_map_height:
-					continue
-					
-				if _tile_map[y][x] == Tiles.Grass:
+				if _is_coordinate_in_tilemap(x, y) and _tile_map[y][x] == Tiles.Grass:
 					lake_border.append(point)
 					break
 		_lakes_borders.append(lake_border)
@@ -261,18 +258,16 @@ func _prepare_rivers_astar():
 	var move_positions = [[-1, 0], [1, 0], [0, -1], [0, 1]]
 	for y in range(_tile_map_height):
 		for x in range(_tile_map_width):
-			if _tile_map[y][x] == Tiles.Grass:
+			if _is_coordinate_valid_for_river(x, y):
 				var id = _calculate_astar_id(x, y)
 				if not astar.has_point(id):
 					astar.add_point(id, Vector2(float(x), float(y)), _calculate_astar_weight(x, y))
+					
 				for move_position in move_positions:
 					var other_x = x + move_position[0]
 					var other_y = y + move_position[1]
-					if other_x < 0 or other_y < 0 or other_x >= _tile_map_width or other_y >= _tile_map_width:
-						continue
-						
-					var other_id = _calculate_astar_id(other_x, other_y)
-					if _tile_map[other_y][other_x] == Tiles.Grass:
+					if _is_coordinate_valid_for_river(other_x, other_y):
+						var other_id = _calculate_astar_id(other_x, other_y)
 						if not astar.has_point(other_id):
 							astar.add_point(other_id, Vector2(float(other_x), float(other_y)),
 								_calculate_astar_weight(other_x, other_y))
@@ -281,14 +276,37 @@ func _prepare_rivers_astar():
 	perf_logger.stop()
 	return astar
 	
+func _is_coordinate_valid_for_river(x: int, y: int):
+	if not _is_coordinate_in_tilemap(x, y):
+		return false
+		
+	if _tile_map[y][x] != Tiles.Grass:
+		return false
+
+	var check_positions = [
+		[-1, 0], [1, 0], [0, -1], [0, 1],
+		[-1, -1], [-1, 1], [1, -1], [1, 1],
+		[-2, 0], [2, 0], [0, -2], [0, 2],
+	]
+	
+	for check_position in check_positions:
+		var check_x = x + check_position[0]
+		var check_y = y + check_position[1]
+		
+		if not _is_coordinate_in_tilemap(check_x, check_y):
+			continue
+
+		if _tile_map[check_y][check_x] != Tiles.Grass and _tile_map[check_y][check_x] != Tiles.Water:
+			return false
+	
+	return true
+	
 func _get_nearest_grass(point: Vector2):
 	var move_positions = [[-1, 0], [1, 0], [0, -1], [0, 1]]
 	for move_position in move_positions:
 		var other_x = point.x + move_position[0]
 		var other_y = point.y + move_position[1]
-		if other_x < 0 or other_y < 0 or other_x >= _tile_map_width or other_y >= _tile_map_width:
-			continue
-		if _tile_map[other_y][other_x] == Tiles.Grass:
+		if _is_coordinate_in_tilemap(other_x, other_y) and _tile_map[other_y][other_x] == Tiles.Grass:
 			return Vector2(other_x, other_y)
 			
 	return null
@@ -381,6 +399,12 @@ func _update_tiles():
 				_set_grass_tile(x, y)
 				
 	perf_logger.stop()
+
+#func _is_coordinate_in_tilemap_v(point: Vector2):
+#	return _is_coordinate_in_tilemap(int(point.x), int(point.y))
+	
+func _is_coordinate_in_tilemap(x: int, y: int):
+	return x >= 0 and x < _tile_map_width and y >= 0 and y < _tile_map_height
 
 func _get_tile_type(x: int, y: int):
 	return _tile_map[y + _tile_map_y_offset][x + _tile_map_x_offset]
