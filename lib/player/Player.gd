@@ -3,7 +3,7 @@ extends KinematicBody2D
 var Bow = preload("res://lib/bow/Bow.tscn")
 
 onready var movement = $KinematicMovementComponent
-
+onready var inventory = $Inventory
 onready var weapon_position = $WeaponPosition
 
 onready var animation_tree = $AnimationTree
@@ -18,9 +18,16 @@ var weapon_position_distance :=0.0
 func _ready():
 	movement.connect("moved",self,"on_moved")
 	movement.connect("stopped",self,"on_stopped")
+	EventBus.connect("player_on_weapon",self, "on_player_on_weapon")
 	animation_state.travel("idle")
 	weapon_position_distance = global_position.distance_to(weapon_position.position)
 
+func on_player_on_weapon(_weapon):
+	print("on_player_on_weapon")
+	if inventory.has_free_slot():
+		_weapon.get_parent().remove_child(_weapon)
+		_weapon.visible = false
+		inventory.add_item(_weapon)
 
 func _physics_process(delta):
 	movement.update(delta)

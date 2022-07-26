@@ -1,9 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://GameScreen.gd" type="Script" id=1]
 [ext_resource path="res://assets/0x72_16x16DungeonTileset.v4.png" type="Texture" id=2]
 [ext_resource path="res://entites/King.tscn" type="PackedScene" id=3]
 [ext_resource path="res://lib/player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://lib/bow/Bow.tscn" type="PackedScene" id=5]
+[ext_resource path="res://lib/ui/HUD.tscn" type="PackedScene" id=6]
 
 [sub_resource type="ConvexPolygonShape2D" id=11]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 16, 16, 16 )
@@ -179,5 +181,11 @@ offset = Vector2( 10, -8 )
 position = Vector2( 63, 7 )
 current = true
 zoom = Vector2( 0.75, 0.75 )
+
+[node name="Bow" parent="Level/Level0" instance=ExtResource( 5 )]
+position = Vector2( 217, 102 )
+
+[node name="HUD" parent="Level/Level0" instance=ExtResource( 6 )]
+player_path = NodePath("../Player")
 
 [node name="Overlays" type="Node" parent="."]

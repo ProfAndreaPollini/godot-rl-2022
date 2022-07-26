@@ -536,7 +536,7 @@ group = "player"
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 37 )
 animation = "idle_left"
-frame = 2
+frame = 3
 playing = true
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -561,3 +561,4 @@ anims/walk_up = SubResource( 74 )
 position = Vector2( -11.3785, 5.77687 )
 
 [node name="Knife" parent="WeaponPosition" instance=ExtResource( 12 )]
+position = Vector2( -0.621498, -2.77687 )

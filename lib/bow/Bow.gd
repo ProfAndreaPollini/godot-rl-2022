@@ -34,3 +34,8 @@ func shoot():
 	arrow.look_at(global_position + 200*direction)
 	arrow.direction = direction
 	get_node(entity).get_parent().add_child(arrow)
+
+
+func _on_BodyArea_body_entered(body):
+	print("{0} is on bow".format({0:body}))
+	EventBus.emit_signal("player_on_weapon",self)
