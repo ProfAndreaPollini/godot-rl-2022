@@ -11,12 +11,12 @@ script = ExtResource( 1 )
 icon_texture = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 4, 0 )
 texture = ExtResource( 2 )
-offset = Vector2( 10, 0 )
 
 [node name="BodyArea" type="Area2D" parent="." groups=["weapon"]]
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea"]
-position = Vector2( 10, 0 )
+position = Vector2( 6, 0 )
 shape = SubResource( 1 )

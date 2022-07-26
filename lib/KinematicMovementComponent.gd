@@ -27,7 +27,7 @@ func get_is_moving():
 	return is_moving
 
 
-func update(delta):
+func update(_delta):
 	var dx =  int(Input.is_action_pressed("ui_right"))-int(Input.is_action_pressed("ui_left"))
 	var dy =  int(Input.is_action_pressed("ui_down"))-int(Input.is_action_pressed("ui_up"))
 	var ds = Vector2(dx,dy).normalized()

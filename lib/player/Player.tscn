@@ -10,7 +10,7 @@
 [ext_resource path="res://assets/RPGMCharacter_v1.0/_down walk.png" type="Texture" id=8]
 [ext_resource path="res://assets/RPGMCharacter_v1.0/_side walk.png" type="Texture" id=9]
 [ext_resource path="res://assets/RPGMCharacter_v1.0/_up walk.png" type="Texture" id=10]
-[ext_resource path="res://lib/bow/Bow.tscn" type="PackedScene" id=11]
+[ext_resource path="res://lib/knife/Knife.tscn" type="PackedScene" id=12]
 
 [sub_resource type="CapsuleShape2D" id=21]
 radius = 7.0
@@ -202,7 +202,6 @@ blend_point_2/node = SubResource( 63 )
 blend_point_2/pos = Vector2( -0.8, 0 )
 blend_point_3/node = SubResource( 64 )
 blend_point_3/pos = Vector2( 0.9, 0 )
-blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id=75]
 animation = "walk_down"
@@ -225,7 +224,6 @@ blend_point_2/node = SubResource( 77 )
 blend_point_2/pos = Vector2( -0.8, 0 )
 blend_point_3/node = SubResource( 78 )
 blend_point_3/pos = Vector2( 0, -0.8 )
-blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=80]
 
@@ -261,7 +259,7 @@ tracks/1/path = NodePath("WeaponPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -301,7 +299,7 @@ tracks/2/path = NodePath("WeaponPosition:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -341,7 +339,7 @@ tracks/2/path = NodePath("WeaponPosition:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -369,7 +367,7 @@ tracks/1/path = NodePath("WeaponPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -397,7 +395,7 @@ tracks/1/path = NodePath("WeaponPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -437,7 +435,7 @@ tracks/2/path = NodePath("WeaponPosition:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -477,7 +475,7 @@ tracks/2/path = NodePath("WeaponPosition:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -505,7 +503,7 @@ tracks/1/path = NodePath("WeaponPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -537,19 +535,17 @@ group = "player"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 37 )
-animation = "walk_up"
-frame = 1
+animation = "idle_left"
+frame = 2
 playing = true
-flip_h = true
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 69 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-process_mode = 0
 parameters/playback = SubResource( 70 )
-parameters/idle/blend_position = Vector2( -0.000947893, -0.677054 )
-parameters/walk/blend_position = Vector2( -0.165877, -0.569405 )
+parameters/idle/blend_position = Vector2( -0.699919, 0.362069 )
+parameters/walk/blend_position = Vector2( 0.130576, -0.0603448 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/idle_down = SubResource( 59 )
@@ -562,7 +558,6 @@ anims/walk_right = SubResource( 72 )
 anims/walk_up = SubResource( 74 )
 
 [node name="WeaponPosition" type="Position2D" parent="."]
-position = Vector2( 0, -18 )
+position = Vector2( -11.3785, 5.77687 )
 
-[node name="Bow" parent="." instance=ExtResource( 11 )]
-position = Vector2( 14, 0 )
+[node name="Knife" parent="WeaponPosition" instance=ExtResource( 12 )]
