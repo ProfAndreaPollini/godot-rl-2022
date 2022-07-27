@@ -56,23 +56,75 @@ texture = ExtResource( 2 )
 unique_name_in_owner = true
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 10.0
+margin_left = 2.0
 margin_top = -197.0
 margin_right = 165.0
 margin_bottom = -25.0
 script = ExtResource( 4 )
 
 [node name="ColorRect" type="ColorRect" parent="InventoryContainer"]
-margin_right = 155.0
+margin_right = 163.0
 margin_bottom = 172.0
 color = Color( 0.505882, 0.505882, 0.505882, 0.403922 )
 
-[node name="GridContainer" type="GridContainer" parent="InventoryContainer/ColorRect"]
+[node name="HBoxContainer" type="HBoxContainer" parent="InventoryContainer/ColorRect"]
+margin_left = 10.0
+margin_top = 10.0
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="InventoryItemIcon" parent="InventoryContainer/ColorRect/GridContainer" instance=ExtResource( 5 )]
+[node name="GridContainer" type="GridContainer" parent="InventoryContainer/ColorRect/HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 56.0
+margin_bottom = 36.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="InventoryItemIcon1" parent="InventoryContainer/ColorRect/HBoxContainer/GridContainer" instance=ExtResource( 5 )]
+rect_min_size = Vector2( 16, 16 )
+texture = null
+
+[node name="InventoryItemIcon2" parent="InventoryContainer/ColorRect/HBoxContainer/GridContainer" instance=ExtResource( 5 )]
+margin_left = 20.0
+margin_right = 36.0
+rect_min_size = Vector2( 16, 16 )
+texture = null
+
+[node name="InventoryItemIcon3" parent="InventoryContainer/ColorRect/HBoxContainer/GridContainer" instance=ExtResource( 5 )]
+margin_left = 40.0
+margin_right = 56.0
+rect_min_size = Vector2( 16, 16 )
+texture = null
+
+[node name="InventoryItemIcon4" parent="InventoryContainer/ColorRect/HBoxContainer/GridContainer" instance=ExtResource( 5 )]
+margin_top = 20.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 16, 16 )
+texture = null
+
+[node name="InventoryItemIcon5" parent="InventoryContainer/ColorRect/HBoxContainer/GridContainer" instance=ExtResource( 5 )]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 16, 16 )
+texture = null
+
+[node name="InventoryItemIcon6" parent="InventoryContainer/ColorRect/HBoxContainer/GridContainer" instance=ExtResource( 5 )]
+margin_left = 40.0
+margin_top = 20.0
+margin_right = 56.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 16, 16 )
+texture = null
+
+[node name="Button" type="Button" parent="InventoryContainer/ColorRect/HBoxContainer"]
+margin_left = 60.0
+margin_right = 80.0
+margin_bottom = 36.0
+text = "X"
 
 [connection signal="mouse_entered" from="InventoryIconContainer/HBoxContainer/MarginContainer/TextureRect" to="." method="_on_TextureRect_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryContainer" to="." method="_on_InventoryContainer_mouse_exited"]
-[connection signal="mouse_exited" from="InventoryContainer/ColorRect" to="." method="_on_ColorRect_mouse_exited"]
+[connection signal="button_down" from="InventoryContainer/ColorRect/HBoxContainer/Button" to="." method="_on_Button_button_down"]

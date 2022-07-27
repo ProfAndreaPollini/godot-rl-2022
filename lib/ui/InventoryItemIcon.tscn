@@ -6,5 +6,8 @@
 [node name="InventoryItemIcon" type="TextureRect"]
 margin_right = 16.0
 margin_bottom = 16.0
+mouse_filter = 0
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
+
+[connection signal="gui_input" from="." to="." method="_on_InventoryItemIcon_gui_input"]

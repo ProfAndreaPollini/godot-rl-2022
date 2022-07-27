@@ -1,3 +1,4 @@
+tool
 extends Area2D
 
 export(Array,String)  var sensing_groups

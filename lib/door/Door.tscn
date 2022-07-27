@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/0x72_16x16DungeonTileset_walls.v2.png" type="Texture" id=1]
+[ext_resource path="res://lib/SenseArea.tscn" type="PackedScene" id=2]
+[ext_resource path="res://lib/door/Door.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 12 )
+
+[node name="Door" type="Area2D"]
+collision_layer = 64
+collision_mask = 17
+script = ExtResource( 3 )
+closed_door_region_position = Vector2( 112, 16 )
+opened_door_region_position = Vector2( 176, 16 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 112, 16, 32, 32 )
+
+[node name="SenseArea" parent="." instance=ExtResource( 2 )]
+collision_layer = 64
+collision_mask = 17
+radius = 32.787
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 4 )
+shape = SubResource( 1 )
+
+[connection signal="mouse_entered" from="SenseArea" to="." method="_on_SenseArea_mouse_entered"]
+[connection signal="mouse_exited" from="SenseArea" to="." method="_on_SenseArea_mouse_exited"]

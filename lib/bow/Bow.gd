@@ -35,6 +35,9 @@ func shoot():
 	arrow.direction = direction
 	get_node(entity).get_parent().add_child(arrow)
 
+func disable_player_on_weapon():
+	$BodyArea.monitoring = false
+	$BodyArea/CollisionShape2D.disabled = true
 
 func _on_BodyArea_body_entered(body):
 	print("{0} is on bow".format({0:body}))

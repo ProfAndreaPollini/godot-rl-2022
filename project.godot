@@ -114,6 +114,7 @@ fire={
 2d_physics/layer_4="bullets"
 2d_physics/layer_5="enemies"
 2d_physics/layer_6="walls"
+2d_physics/layer_7="doors"
 
 [physics]
 
