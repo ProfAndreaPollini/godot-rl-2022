@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://lib/toggle/ToggleElement.gd" type="Script" id=1]
+[ext_resource path="res://lib/SenseArea.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/dungeontiles-extended v1.1/dungeontileset-extended.png" type="Texture" id=3]
+[ext_resource path="res://lib/toggle/Interactor.gd" type="Script" id=4]
+[ext_resource path="res://assets/fonts/dialogue_fonts.tres" type="DynamicFont" id=5]
+
+[node name="ToggleElement" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+hframes = 2
+region_enabled = true
+region_rect = Rect2( 144, 322, 32, 12 )
+
+[node name="Interactor" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="SenseArea" parent="." instance=ExtResource( 2 )]
+collision_layer = 2
+
+[node name="InteractorUIMessage" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="InteractorUIMessage"]
+anchor_right = 0.174
+anchor_bottom = 0.202
+margin_right = 4.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 5 )
+text = "F"
+
+[connection signal="body_entered" from="SenseArea" to="." method="_on_SenseArea_body_entered"]
+[connection signal="body_exited" from="SenseArea" to="." method="_on_SenseArea_body_exited"]

@@ -1,5 +1,6 @@
 tool
 extends Area2D
+class_name SenseArea
 
 export(Array,String)  var sensing_groups
 export(NodePath) var entity

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://GameScreen.gd" type="Script" id=1]
 [ext_resource path="res://assets/0x72_16x16DungeonTileset.v4.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/0x72_16x16DungeonTileset_walls.v2.png" type="Texture" id=7]
 [ext_resource path="res://assets/Structures.png" type="Texture" id=8]
 [ext_resource path="res://lib/door/Door.tscn" type="PackedScene" id=9]
+[ext_resource path="res://lib/toggle/ToggleElement.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=11]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 16, 16, 16 )
@@ -226,6 +227,9 @@ tile_data = PoolIntArray( -65536, 0, 196608, -65535, 0, 196608, -65534, 0, 19660
 
 [node name="Door" parent="Level/Level0" instance=ExtResource( 9 )]
 position = Vector2( 128, 32 )
+context = {
+"toggle": NodePath("../ToggleElement")
+}
 
 [node name="King" parent="Level/Level0" instance=ExtResource( 3 )]
 visible = false
@@ -245,5 +249,8 @@ position = Vector2( 217, 102 )
 
 [node name="HUD" parent="Level/Level0" instance=ExtResource( 6 )]
 player_path = NodePath("../Player")
+
+[node name="ToggleElement" parent="Level/Level0" instance=ExtResource( 10 )]
+position = Vector2( 184, 72 )
 
 [node name="Overlays" type="Node" parent="."]
