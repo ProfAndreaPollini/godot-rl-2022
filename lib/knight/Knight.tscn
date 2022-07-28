@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/Fantasy RPG NPCs - Individuel Frames/Knight - Standard/Knight_Idle_3.png" type="Texture" id=1]
 [ext_resource path="res://assets/Fantasy RPG NPCs - Individuel Frames/Knight - Standard/Knight_Idle_2.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://assets/Fantasy RPG NPCs - Individuel Frames/Knight - Standard/Knight_Walk_1.png" type="Texture" id=6]
 [ext_resource path="res://assets/Fantasy RPG NPCs - Individuel Frames/Knight - Standard/Knight_Walk_2.png" type="Texture" id=7]
 [ext_resource path="res://assets/Fantasy RPG NPCs - Individuel Frames/Knight - Standard/Knight_Walk_3.png" type="Texture" id=8]
+[ext_resource path="res://lib/knight/SimpleMovement.gd" type="Script" id=9]
+[ext_resource path="res://lib/knight/Knight.gd" type="Script" id=10]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -111,7 +113,11 @@ states/walk/position = Vector2( 116, 50 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=9]
 
-[node name="Knight" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 2, 3.5 )
+
+[node name="Knight" type="KinematicBody2D"]
+script = ExtResource( 10 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.4 )
@@ -132,4 +138,19 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 process_mode = 0
 parameters/playback = SubResource( 9 )
-parameters/walk/blend_position = -0.956822
+parameters/walk/blend_position = -0.924007
+
+[node name="SimpleMovement" type="Node" parent="."]
+script = ExtResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -3.5 )
+shape = SubResource( 10 )
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 2.12
+avoidance_enabled = true
+
+[node name="Line2D" type="Line2D" parent="."]
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_NavigationAgent2D_velocity_computed"]
