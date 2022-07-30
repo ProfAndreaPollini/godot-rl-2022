@@ -535,7 +535,6 @@ _data = [ Vector2( 0, 0.344318 ), 0.0, 0.0, 0, 0, Vector2( 0.333333, 0.635227 ),
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 128, 137 )
-scale = Vector2( 0.5, 0.5 )
 collision_mask = 48
 script = ExtResource( 1 )
 

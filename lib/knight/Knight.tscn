@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://assets/Fantasy RPG NPCs - Individuel Frames/Knight - Standard/Knight_Idle_3.png" type="Texture" id=1]
 [ext_resource path="res://assets/Fantasy RPG NPCs - Individuel Frames/Knight - Standard/Knight_Idle_2.png" type="Texture" id=2]
@@ -10,6 +10,26 @@
 [ext_resource path="res://assets/Fantasy RPG NPCs - Individuel Frames/Knight - Standard/Knight_Walk_3.png" type="Texture" id=8]
 [ext_resource path="res://lib/knight/SimpleMovement.gd" type="Script" id=9]
 [ext_resource path="res://lib/knight/Knight.gd" type="Script" id=10]
+[ext_resource path="res://addons/beehave/nodes/beehave_root.gd" type="Script" id=11]
+[ext_resource path="res://lib/knight/AnimatedSprite.gd" type="Script" id=12]
+[ext_resource path="res://assets/testblood.png" type="Texture" id=13]
+
+[sub_resource type="Shader" id=11]
+code = "shader_type canvas_item;
+
+uniform bool hit = false;
+
+void fragment() {
+	vec4 tex_color = texture(TEXTURE,UV);
+	if (hit) {
+		COLOR = vec4(1,1,1,tex_color.a);
+	} else
+		COLOR = tex_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=12]
+shader = SubResource( 11 )
+shader_param/hit = false
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -23,6 +43,28 @@ animations = [ {
 "name": "walk",
 "speed": 5.0
 } ]
+
+[sub_resource type="Animation" id=13]
+resource_name = "hit"
+length = 0.3
+step = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath("AnimatedSprite:set_hit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_hit"
+}, {
+"args": [ false ],
+"method": "set_hit"
+} ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
@@ -101,11 +143,21 @@ animation = "walk_left"
 [sub_resource type="AnimationNodeAnimation" id=6]
 animation = "walk_right"
 
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "hit"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "walk_left"
+
 [sub_resource type="AnimationNodeBlendSpace1D" id=7]
 blend_point_0/node = SubResource( 5 )
 blend_point_0/pos = -0.8
 blend_point_1/node = SubResource( 6 )
 blend_point_1/pos = 0.7
+blend_point_2/node = SubResource( 14 )
+blend_point_2/pos = -0.8
+blend_point_3/node = SubResource( 15 )
+blend_point_3/pos = -0.8
 
 [sub_resource type="AnimationNodeStateMachine" id=8]
 states/walk/node = SubResource( 7 )
@@ -114,20 +166,37 @@ states/walk/position = Vector2( 116, 50 )
 [sub_resource type="AnimationNodeStateMachinePlayback" id=9]
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 2, 3.5 )
+extents = Vector2( 7, 9.5 )
+
+[sub_resource type="CanvasItemMaterial" id=16]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id=19]
+max_value = 100.0
+_data = [ Vector2( 0.112121, 0 ), 487.5, 487.5, 0, 0, Vector2( 0.348485, 34.3182 ), 0.0, 0.0, 0, 0, Vector2( 0.49697, 98.8636 ), 0.0, 0.0, 0, 0, Vector2( 0.909091, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=18]
+_data = [ Vector2( 0, 0.686364 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.131818 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Knight" type="KinematicBody2D"]
+collision_layer = 16
+collision_mask = 8
 script = ExtResource( 10 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.5, 0.4 )
+material = SubResource( 12 )
 frames = SubResource( 1 )
 animation = "walk"
 frame = 1
 offset = Vector2( 0, -16 )
 flip_h = true
+script = ExtResource( 12 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/hit = SubResource( 13 )
 anims/idle = SubResource( 2 )
 anims/walk_left = SubResource( 4 )
 anims/walk_right = SubResource( 3 )
@@ -138,19 +207,44 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 process_mode = 0
 parameters/playback = SubResource( 9 )
-parameters/walk/blend_position = -0.924007
+parameters/walk/blend_position = -0.800503
 
 [node name="SimpleMovement" type="Node" parent="."]
 script = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -3.5 )
+position = Vector2( 0, -9.5 )
 shape = SubResource( 10 )
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-target_desired_distance = 2.12
+target_desired_distance = 10.0
 avoidance_enabled = true
+radius = 2.0
+neighbor_dist = 10.0
 
-[node name="Line2D" type="Line2D" parent="."]
+[node name="BeehaveRoot" type="Node" parent="."]
+script = ExtResource( 11 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource( 16 )
+emitting = false
+amount = 48
+lifetime = 14.87
+one_shot = true
+speed_scale = 8.88
+explosiveness = 0.88
+lifetime_randomness = 0.1
+fract_delta = false
+texture = ExtResource( 13 )
+spread = 23.12
+gravity = Vector2( 0, 0 )
+initial_velocity = 28.91
+initial_velocity_random = 1.0
+linear_accel = 10.4
+damping = 11.56
+damping_curve = SubResource( 19 )
+scale_amount = 0.1
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 18 )
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_NavigationAgent2D_velocity_computed"]

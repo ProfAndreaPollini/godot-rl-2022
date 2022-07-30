@@ -17,6 +17,13 @@ script = ExtResource( 3 )
 closed_door_region_position = Vector2( 112, 16 )
 opened_door_region_position = Vector2( 176, 16 )
 
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = 16.0
+color = Color( 0, 0, 0, 1 )
+
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 region_enabled = true

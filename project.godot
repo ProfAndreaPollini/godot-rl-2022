@@ -9,30 +9,115 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Leaf",
+"class": "ActionLeaf",
+"language": "GDScript",
+"path": "res://addons/beehave/nodes/leaves/action.gd"
+}, {
+"base": "Decorator",
+"class": "AlwaysFailDecorator",
+"language": "GDScript",
+"path": "res://addons/beehave/nodes/decorators/failer.gd"
+}, {
+"base": "Decorator",
+"class": "AlwaysSucceedDecorator",
+"language": "GDScript",
+"path": "res://addons/beehave/nodes/decorators/succeeder.gd"
+}, {
+"base": "BeehaveTree",
+"class": "BeehaveNode",
+"language": "GDScript",
+"path": "res://addons/beehave/nodes/beehave_node.gd"
+}, {
+"base": "BeehaveTree",
+"class": "BeehaveRoot",
+"language": "GDScript",
+"path": "res://addons/beehave/nodes/beehave_root.gd"
+}, {
+"base": "Node",
+"class": "BeehaveTree",
+"language": "GDScript",
+"path": "res://addons/beehave/nodes/beehave_tree.gd"
+}, {
 "base": "Node",
 "class": "Component",
 "language": "GDScript",
 "path": "res://lib/ecs/Component.gd"
+}, {
+"base": "BeehaveNode",
+"class": "Composite",
+"language": "GDScript",
+"path": "res://addons/beehave/nodes/composites/composite.gd"
+}, {
+"base": "Leaf",
+"class": "ConditionLeaf",
+"language": "GDScript",
+"path": "res://addons/beehave/nodes/leaves/condition.gd"
 }, {
 "base": "Node",
 "class": "CoolDown",
 "language": "GDScript",
 "path": "res://entites/weapons/CoolDown.gd"
 }, {
+"base": "BeehaveNode",
+"class": "Decorator",
+"language": "GDScript",
+"path": "res://addons/beehave/nodes/decorators/decorator.gd"
+}, {
 "base": "TextureRect",
 "class": "InventoryItemIcon",
 "language": "GDScript",
 "path": "res://lib/ui/InventoryItemIcon.gd"
+}, {
+"base": "Decorator",
+"class": "InverterDecorator",
+"language": "GDScript",
+"path": "res://addons/beehave/nodes/decorators/inverter.gd"
 }, {
 "base": "Node2D",
 "class": "Item",
 "language": "GDScript",
 "path": "res://lib/Item.gd"
 }, {
+"base": "BeehaveNode",
+"class": "Leaf",
+"language": "GDScript",
+"path": "res://addons/beehave/nodes/leaves/leaf.gd"
+}, {
+"base": "Decorator",
+"class": "LimiterDecorator",
+"language": "GDScript",
+"path": "res://addons/beehave/nodes/decorators/limiter.gd"
+}, {
+"base": "Node",
+"class": "RandomWalk",
+"language": "GDScript",
+"path": "res://lib/procgen/RandomWalk.gd"
+}, {
+"base": "Composite",
+"class": "SelectorComposite",
+"language": "GDScript",
+"path": "res://addons/beehave/nodes/composites/selector.gd"
+}, {
+"base": "Composite",
+"class": "SelectorStarComposite",
+"language": "GDScript",
+"path": "res://addons/beehave/nodes/composites/selector_star.gd"
+}, {
 "base": "Area2D",
 "class": "SenseArea",
 "language": "GDScript",
 "path": "res://lib/SenseArea.gd"
+}, {
+"base": "Composite",
+"class": "SequenceComposite",
+"language": "GDScript",
+"path": "res://addons/beehave/nodes/composites/sequence.gd"
+}, {
+"base": "Composite",
+"class": "SequenceStarComposite",
+"language": "GDScript",
+"path": "res://addons/beehave/nodes/composites/sequence_star.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -55,11 +140,28 @@ _global_script_classes=[ {
 "path": "res://entites/weapons/Weapon.gd"
 } ]
 _global_script_class_icons={
+"ActionLeaf": "res://addons/beehave/icons/action.svg",
+"AlwaysFailDecorator": "res://addons/beehave/icons/fail.svg",
+"AlwaysSucceedDecorator": "res://addons/beehave/icons/succeed.svg",
+"BeehaveNode": "res://addons/beehave/icons/action.svg",
+"BeehaveRoot": "res://addons/beehave/icons/tree.svg",
+"BeehaveTree": "",
 "Component": "",
+"Composite": "res://addons/beehave/icons/category_composite.svg",
+"ConditionLeaf": "res://addons/beehave/icons/condition.svg",
 "CoolDown": "",
+"Decorator": "res://addons/beehave/icons/category_decorator.svg",
 "InventoryItemIcon": "",
+"InverterDecorator": "res://addons/beehave/icons/inverter.svg",
 "Item": "",
+"Leaf": "res://addons/beehave/icons/action.svg",
+"LimiterDecorator": "res://addons/beehave/icons/limiter.svg",
+"RandomWalk": "",
+"SelectorComposite": "res://addons/beehave/icons/selector.svg",
+"SelectorStarComposite": "res://addons/beehave/icons/selector.svg",
 "SenseArea": "",
+"SequenceComposite": "res://addons/beehave/icons/sequencer.svg",
+"SequenceStarComposite": "res://addons/beehave/icons/sequencer.svg",
 "State": "",
 "StateManager": "",
 "System": "",
@@ -89,6 +191,10 @@ window/stretch/aspect="keep"
 [editor]
 
 reimport_missing_imported_files=false
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/beehave/plugin.cfg" )
 
 [gui]
 
